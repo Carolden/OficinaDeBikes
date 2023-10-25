@@ -1,6 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import route from "./routes/route";
+import route from "./routes/usuarios";
 import autenticacao from './routes/autenticacao';
 // import beneficiariosRoutes from './routes/beneficiarios';
 // import cdsRoutes from './routes/cds';

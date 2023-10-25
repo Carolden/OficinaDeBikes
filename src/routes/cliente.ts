@@ -8,7 +8,7 @@ let router: Router = Router();
 
 let clienteController: ClienteController = new ClienteController();
 
-router.post('/cliente', usuariosController.list);
+router.post('/cliente', clienteController.create);
 
 // router.get('/usuarios/:id', validarSeExiste, usuariosController.find);
 

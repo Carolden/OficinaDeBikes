@@ -8,7 +8,7 @@ let router: Router = Router();
 
 let ordemDeServicoController: OrdemDeServicoController = new OrdemDeServicoController();
 
-router.post('/ordem', usuariosController.list);
+// router.post('/ordem', usuariosController.list);
 
 // router.get('/usuarios/:id', validarSeExiste, usuariosController.find);
 

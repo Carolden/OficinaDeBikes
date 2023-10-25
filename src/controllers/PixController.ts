@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import fetch from 'node-fetch' //REMOVER EM CASO DE ERRO
+import fetch from 'node-fetch'
 
 export class PixController {
 

@@ -20,8 +20,10 @@ form.addEventListener('submit', async (event) => {
     body: JSON.stringify(payload)
   })
 
+  console.log(resposta.ok);
+
   if (resposta.ok) {
-    location.href = 'index.html';
+    location.href = './../index/index.html'
   } else if (resposta.status == 401) {
     let dados = await resposta.json();
     alert(dados.mensagem);

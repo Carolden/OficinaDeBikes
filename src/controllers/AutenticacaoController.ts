@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Usuario } from "../models/Usuario";
-import bcrypt from "bcrypt";
+import { Usuario } from "../models/Usuarios";
+// import bcrypt from "bcrypt"; sem criptografia ainda
 
 export class AutenticacaoController {
 
@@ -19,11 +19,13 @@ export class AutenticacaoController {
       return res.status(401).json({ mensagem: 'Usuário não encontrado' });
     }
 
-    let resultado = await bcrypt.compare(senha, usuario.senha);
+    // let resultado = await bcrypt.compare(senha, usuario.senha);
 
-    if (! resultado) {
-      return res.status(401).json({ mensagem: 'Senha inválida' });
-    }
+    // if (! resultado) {
+    //   return res.status(401).json({ mensagem: 'Senha inválida' });
+    // }
+
+
 
     let token: string = Buffer.from(`${email}:${senha}`).toString('base64');
 

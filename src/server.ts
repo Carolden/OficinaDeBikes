@@ -1,7 +1,7 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import route from "./routes/route";
-// import categoriasRoutes from './routes/categorias';
+import autenticacao from './routes/autenticacao';
 // import beneficiariosRoutes from './routes/beneficiarios';
 // import cdsRoutes from './routes/cds';
 // import cidadesRoutes from './routes/cidades';
@@ -19,7 +19,7 @@ server.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 server.use(route);
-// server.use(categoriasRoutes);
+server.use(autenticacao);
 // server.use(beneficiariosRoutes);
 // server.use(cdsRoutes);
 // server.use(cidadesRoutes);
@@ -29,7 +29,7 @@ server.use(route);
 
 export default {
   start () {
-    server.listen(4000, () => {
+    server.listen(3000, () => {
       console.log('Server started!');
     });
   }

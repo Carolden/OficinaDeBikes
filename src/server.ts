@@ -20,7 +20,7 @@ server.use((req: Request, res: Response, next: NextFunction) => {
 
 server.use(route);
 server.use(autenticacao);
-// server.use(beneficiariosRoutes);
+server.use(ordemDeServico);
 server.use(cliente);
 // server.use(cidadesRoutes);
 // server.use(itensRoutes);

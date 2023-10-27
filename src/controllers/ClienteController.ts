@@ -14,7 +14,7 @@ export class ClienteController {
     
         return res.status(200).json(cliente);
       }
-    
+      
       async find (req: Request, res: Response): Promise<Response> {
         let cliente: Cliente = res.locals.cliente;
     
@@ -24,7 +24,6 @@ export class ClienteController {
       async create (req: Request, res: Response): Promise<Response> {
         let body = req.body;
     
-        // let senha = await bcrypt.hash(body.senha, 10);
     
         let cliente: Cliente = await Cliente.create({
           nome: body.nome,
@@ -33,7 +32,6 @@ export class ClienteController {
           telefone: body.telefone,
         }).save();
     
-        // let { senha: s, ...usuarioSemSenha } = cliente;
     
         return res.status(200).json(cliente);
       }
@@ -42,7 +40,6 @@ export class ClienteController {
         let body = req.body;
         let cliente: Cliente = res.locals.cliente;
     
-        // let senha = await bcrypt.hash(body.senha, 10);
     
         cliente.nome = body.nome;
         cliente.endereco = body.endereco;
@@ -50,7 +47,6 @@ export class ClienteController {
         cliente.telefone = body.telefone;
         await cliente.save();
     
-        // let { senha: s, ...usuarioSemSenha } = cliente;
     
         return res.status(200).json(cliente);
       }

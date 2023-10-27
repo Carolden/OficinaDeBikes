@@ -12,12 +12,12 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
       email: yup.string().email().required(),
       telefone: yup.string().required()
     });
-  
+
     let payload = req.body;
-  
+
     try {
       req.body = await schema.validate(payload, { abortEarly: false, stripUnknown: true });
-  
+
       return next();
     } catch (error) {
       if (error instanceof yup.ValidationError) {
@@ -30,12 +30,12 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
 async function validarSeEmailExiste (req: Request, res: Response, next: NextFunction): Promise<Response|void> {
     let email: string = req.body.email;
     let id: number|undefined = req.params.id ? Number(req.params.id) : undefined;
-  
+
     let cliente: Cliente|null = await Cliente.findOneBy({ email, id: id ? Not(id) : undefined });
     if (cliente) {
       return res.status(422).json({ error: 'Email já cadastrado!' });
     }
-  
+
     return next();
   }
 
@@ -45,9 +45,9 @@ async function validarSeExiste (req: Request, res: Response, next: NextFunction)
     if (! cliente) {
       return res.status(422).json({ error: 'Usuario não encontrado!' });
     }
-  
+
     res.locals.cliente = cliente;
-  
+
     return next();
   }
 

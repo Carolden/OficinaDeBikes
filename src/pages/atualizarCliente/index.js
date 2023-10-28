@@ -2,12 +2,15 @@ let nome = document.getElementById('nome');
 let endereco = document.getElementById('endereco');
 let email = document.getElementById('email');
 let telefone = document.getElementById('telefone');
+let id = document.getElementById('id');
 let button = document.getElementById('button');
 
 
 button.addEventListener('click', async (event) => {
 
   console.log(nome.innerText, endereco.innerText, telefone.innerText, email.innerText);
+
+  let idCliente = id.value
 
   let payload = {
     nome: nome.value,
@@ -16,8 +19,8 @@ button.addEventListener('click', async (event) => {
     telefone: telefone.value,
   };
 
-  let resposta = await fetch('http://localhost:3000/cliente', {
-    method: 'POST',
+  let resposta = await fetch(`http://localhost:3000/cliente/${idCliente}`, {
+    method: 'PUT',
     headers: {
       'Content-type': 'application/json',
       'Accept': 'application/json'
@@ -26,7 +29,7 @@ button.addEventListener('click', async (event) => {
   })
 
   if (resposta.ok) {
-    alert('Cliente cadastrado com sucesso!')
+    alert('Cliente atualizado com sucesso!')
     window.location.reload(true)
   } else if (resposta.status == 401) {
     let dados = await resposta.json();

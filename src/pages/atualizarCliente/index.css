@@ -27,3 +27,7 @@ body {
 #id{
   max-width: 80px;
 }
+
+#bnt-voltar {
+  margin-top: 20px;
+}

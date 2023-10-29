@@ -65,4 +65,6 @@ router.put('/cliente/:id', validarSeExiste, validarPayload, validarSeEmailExiste
 
 router.delete('/cliente/:id', validarSeExiste, clienteController.delete);
 
+router.get("/clientePDF", clienteController.downloadPdf);
+
 export default router;

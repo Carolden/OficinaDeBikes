@@ -67,4 +67,6 @@ router.delete('/cliente/:id', validarSeExiste, clienteController.delete);
 
 router.get("/clientePDF", clienteController.downloadPdf);
 
+router.get("/clienteCSV", clienteController.exportCsv);
+
 export default router;

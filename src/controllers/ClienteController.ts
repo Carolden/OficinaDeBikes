@@ -114,5 +114,24 @@ export class ClienteController {
         return pdfBuffer;
       }
 
+      async exportCsv(req: Request, res: Response): Promise<Response> {
+        let nome = req.query.nome;
+
+        let clientes: Cliente[] = await Cliente.findBy({
+          nome: nome ? ILike(`${nome}`) : undefined,
+        });
+
+        let header = '"ID";"Nome";"Endereco";"E-Mail";"Telefone"\n';
+        let csv = header;
+
+        clientes.forEach((element) => {
+          csv += `"${element.id}";"${element.nome}";"${element.endereco}";"${element.email}";"${element.telefone}"\r`;
+        });
+
+        res.append("Content-Type", "text/csv");
+        res.attachment("ListaUsuarios.csv");
+        return res.status(200).send(csv);
+      }
+
 
 }

@@ -102,5 +102,16 @@ async function exportPdf() {
   download(await pdf.blob(), "application/x-pdf", "ListaClientes.pdf");
 }
 
+async function exportCsv() {
+  let csv = await fetch("http://localhost:3000/clienteCSV", {
+    headers: {
+      "Content-type": "application/json",
+      Acccept: "appplication/json",
+      // Authorization: authorization,
+    },
+  });
+  download(await csv.text(), "text/csv", "ListaClientes.csv");
+}
+
 
 

@@ -31,9 +31,9 @@ export class OrdemDeServicoController {
         bicicletaModelo,
         bicicletaMarca,
         valor,
-        clienteId, 
+        clienteId,
       } = req.body;
-  
+
       const ordem = new OrdemServico();
       ordem.dataCriacao = dataCriacao;
       ordem.descricaoServico = descricaoServico;
@@ -43,43 +43,47 @@ export class OrdemDeServicoController {
       ordem.bicicletaModelo = bicicletaModelo;
       ordem.bicicletaMarca = bicicletaMarca;
       ordem.valor = valor;
-  
+
       const cliente = await Cliente.findOneBy(clienteId);
       if (!cliente) {
         return res.status(404).json({ message: 'Cliente não encontrado.' });
       }
-  
+
       ordem.cliente = cliente;
-  
-      await ordem.save();      
-  
-      return res.status(201).json(ordem); 
+
+      await ordem.save();
+
+      return res.status(201).json(ordem);
     } catch (error) {
       console.error('Erro ao criar a ordem de serviço', error);
       return res.status(500).json({ message: 'Erro ao criar a ordem de serviço' });
     }
   }
 
-  async update (req: Request, res: Response): Promise<Response> {
-    let body = req.body;
-    let cliente: Cliente = res.locals.cliente;
+  async list(req: Request, res: Response) {
 
-    cliente.nome = body.nome;
-    cliente.endereco = body.endereco;
-    cliente.email = body.email;
-    cliente.telefone = body.telefone;
-    await cliente.save();
-
-    return res.status(200).json(cliente);
   }
 
-  async delete (req: Request, res: Response): Promise<Response> {
-    let cliente: Cliente = res.locals.cliente;
+  // async update (req: Request, res: Response): Promise<Response> {
+  //   let body = req.body;
+  //   let cliente: Cliente = res.locals.cliente;
 
-    cliente.remove();
+  //   cliente.nome = body.nome;
+  //   cliente.endereco = body.endereco;
+  //   cliente.email = body.email;
+  //   cliente.telefone = body.telefone;
+  //   await cliente.save();
 
-    return res.status(200).json();
-  }
-  
-  }
+  //   return res.status(200).json(cliente);
+  // }
 
+  // async delete (req: Request, res: Response): Promise<Response> {
+  //   let cliente: Cliente = res.locals.cliente;
+
+  //   cliente.remove();
+
+  //   return res.status(200).json();
+  // }
+
+  // }
+}

@@ -1,8 +1,8 @@
-let inputEmail = document.getElementById('email');
-let inputSenha = document.getElementById('senha');
-let form = document.getElementById('formulario');
+let inputEmail = document.getElementById('floatingInput');
+let inputSenha = document.getElementById('floatingPassword');
+let button = document.getElementById('button');
 
-form.addEventListener('submit', async (event) => {
+button.addEventListener('click', async (event) => {
   event.stopPropagation();
   event.preventDefault();
 

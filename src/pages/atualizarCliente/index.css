@@ -4,9 +4,8 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.form-control {
-  display: flex;
-  align-items: center;
+.button {
+    padding: 20px;
 }
 
 #formulario {
@@ -19,4 +18,16 @@ body {
   padding: 80px;
   background-color: lightgrey;
   border-radius: 10px;
+}
+
+.form-floating {
+  margin: 20px;
+}
+
+#id{
+  max-width: 80px;
+}
+
+#bnt-voltar {
+  margin-top: 20px;
 }

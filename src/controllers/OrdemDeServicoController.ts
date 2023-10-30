@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { OrdemServico } from '../models/OrdemDeServico';
 import { ILike } from 'typeorm';
 import { Cliente } from '../models/Cliente';
+import AppDataSource from '../db';
 
 export class OrdemDeServicoController {
   // async list (req: Request, res: Response): Promise<Response> {
@@ -60,9 +61,11 @@ export class OrdemDeServicoController {
     }
   }
 
-  async list(req: Request, res: Response) {
+  async list (req: Request, res: Response): Promise<Response> {
+      let ordem: OrdemServico[] = await OrdemServico.find();
 
-  }
+    return res.status(200).json(ordem)
+}
 
   // async update (req: Request, res: Response): Promise<Response> {
   //   let body = req.body;

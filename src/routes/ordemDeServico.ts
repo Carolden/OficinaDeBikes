@@ -3,6 +3,42 @@ import { OrdemDeServicoController } from '../controllers/OrdemDeServicoControlle
 import * as yup from 'yup';
 import { Usuario } from '../models/Usuarios';
 import { Not } from 'typeorm';
+import { OrdemServico } from '../models/OrdemDeServico';
+
+async function validarPayload (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
+  let schema = yup.object({
+      descricaoServico: yup.string().min(3).max(255).required(),
+      bicicletaModelo: yup.string().min(3).max(255).required(),
+      bicicletaMarca: yup.string().min(3).max(255).required(),
+      valor: yup.number(),
+      cliente_id: yup.number(),
+  });
+
+  let payload = req.body;
+
+  try {
+      req.body = await schema.validate(payload, { abortEarly: false, stripUnknown: true});
+      return next();
+  } catch(error){
+      if (error instanceof yup.ValidationError) {
+          return res.status(422).json({erros: error.errors});
+      }
+      return res.status(500).json({error: 'Ops! Algo deu errado!'});
+  }
+}
+
+async function validarSeExiste (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
+  let id = Number (req.params.id);
+  let OrdemDeServico: OrdemServico|null = await OrdemServico.findOneBy ({ OrdemServicoID: id });
+  if ( ! OrdemDeServico) {
+      return res.status(422).json({error: 'Ordem de serviço não encontrada!' });
+  } else {
+      res.locals.OrdemDeServico = OrdemDeServico;
+  }
+
+  return next();
+}
+
 
 let router: Router = Router();
 
@@ -10,7 +46,7 @@ let ordemDeServicoController: OrdemDeServicoController = new OrdemDeServicoContr
 
 router.post('/ordem', ordemDeServicoController.create);
 
-// router.get('/usuarios/:id', validarSeExiste, usuariosController.find);
+router.get('/ordem', ordemDeServicoController.list);
 
 // router.post('/usuarios', validarPayload, validarSeEmailExiste, usuariosController.create);
 

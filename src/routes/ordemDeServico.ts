@@ -29,7 +29,7 @@ async function validarPayload (req: Request, res: Response, next: NextFunction):
 
 async function validarSeExiste (req: Request, res: Response, next: NextFunction): Promise<Response|void>{
   let id = Number (req.params.id);
-  let OrdemDeServico: OrdemServico|null = await OrdemServico.findOneBy ({ OrdemServicoID: id });
+  let OrdemDeServico: OrdemServico|null = await OrdemServico.findOneBy ({ ordemid: id });
   if ( ! OrdemDeServico) {
       return res.status(422).json({error: 'Ordem de serviço não encontrada!' });
   } else {
@@ -48,10 +48,8 @@ router.post('/ordem', ordemDeServicoController.create);
 
 router.get('/ordem', ordemDeServicoController.list);
 
-// router.post('/usuarios', validarPayload, validarSeEmailExiste, usuariosController.create);
+router.put('/ordem/:id', ordemDeServicoController.update);
 
-// router.put('/usuarios/:id', validarSeExiste, validarPayload, validarSeEmailExiste, usuariosController.update);
-
-// router.delete('/usuarios/:id', validarSeExiste, usuariosController.delete);
+router.delete('/ordem/:id', validarSeExiste, ordemDeServicoController.delete);
 
 export default router;

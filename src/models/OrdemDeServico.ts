@@ -4,7 +4,7 @@ import { Cliente } from './Cliente';
   @Entity('ordem')
   export class OrdemServico extends BaseEntity {
     @PrimaryGeneratedColumn()
-    OrdemServicoID: number;
+    ordemid: number;
   
     @Column()
     dataCriacao: Date;

@@ -4,6 +4,7 @@ import { ILike } from 'typeorm';
 import { Cliente } from '../models/Cliente';
 import AppDataSource from '../db';
 import db from '../db';
+import { log } from 'console';
 
 export class OrdemDeServicoController {
 
@@ -36,7 +37,7 @@ export class OrdemDeServicoController {
         return res.status(404).json({ message: 'Cliente não encontrado.' });
       }
 
-      ordem.cliente = cliente;
+      ordem.cliente = clienteId;
 
       await ordem.save();
 
@@ -68,14 +69,14 @@ async update(req: Request, res: Response): Promise<Response> {
     } = req.body;
 
     const ordemId = Number(req.params.id);
-    
+
     const ordem = await OrdemServico.findOneBy({ordemid: ordemId});
-        
+
     if (!ordem) {
       return res.status(404).json({ message: 'Ordem de serviço não encontrada.' });
     }
 
-    ordem.dataCriacao = dataCriacao;    
+    ordem.dataCriacao = dataCriacao;
     ordem.descricaoServico = descricaoServico;
     ordem.statusOrdemServico = statusOrdemServico;
     ordem.dataInicioServico = dataInicioServico;
@@ -114,7 +115,7 @@ async delete(req: Request, res: Response): Promise<Response> {
 
     await ordem.remove();
 
-    return res.status(204).send(); 
+    return res.status(204).send();
   } catch (error) {
     console.error('Erro ao excluir a ordem de serviço', error);
     return res.status(500).json({ message: 'Erro ao excluir a ordem de serviço' });

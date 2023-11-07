@@ -1,23 +1,23 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Cliente } from './Cliente';
-  
+
   @Entity('ordem')
   export class OrdemServico extends BaseEntity {
     @PrimaryGeneratedColumn()
     ordemid: number;
-  
+
     @Column()
     dataCriacao: Date;
-  
+
     @Column()
     descricaoServico: string;
-  
+
     @Column()
     statusOrdemServico: string;
-  
+
     @Column()
     dataInicioServico: Date;
-  
+
     @Column()
     dataConclusaoServico: Date;
 
@@ -29,9 +29,9 @@ import { Cliente } from './Cliente';
 
     @Column()
     valor: number;
-  
+
     @ManyToOne(() => Cliente, (cliente) => cliente.ordensServico)
     @JoinColumn({ name: 'id' })
     cliente: Cliente;
   }
-  
+

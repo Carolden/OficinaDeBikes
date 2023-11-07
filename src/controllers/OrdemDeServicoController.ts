@@ -5,6 +5,7 @@ import { Cliente } from '../models/Cliente';
 import AppDataSource from '../db';
 import db from '../db';
 import { log } from 'console';
+import puppeteer from 'puppeteer';
 
 export class OrdemDeServicoController {
 
@@ -121,4 +122,78 @@ async delete(req: Request, res: Response): Promise<Response> {
     return res.status(500).json({ message: 'Erro ao excluir a ordem de serviço' });
   }
 }
+
+async downloadPdf(req: Request, res: Response) {
+  let nome = req.query.nome;
+  let html: string = `<style>
+  *{
+    font-family: "Arial";
+  }
+  table{
+    width:100%;
+    text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+  }
+  table td{
+    padding: 10px
+  }
+  table th{
+    padding: 10px
+  }
+  </style>
+  <h1>Lista de ordens de serviço</h1>
+<table border="1">`;
+
+  let ordens: OrdemServico[] = await OrdemServico.findBy({
+    // nome: nome ? ILike(`${nome}`) : undefined,
+  });
+  html += "<tr><th>ID</th> <th>Status</th> <th>Modelo Bicicleta</th> <th>Marca Bicicleta</th> <th>Valor</th></tr>";
+  ordens.forEach((element) => {
+    html += `<tr><td>${element.ordemid}</td> <td>${element.statusOrdemServico}</td> <td>${element.bicicletaModelo}</td> <td>${element.bicicletaMarca}</td> <td>${element.valor}</td></tr>\r`;
+  });
+  html += "</table>";
+  let today = new Date(Date.now());
+  let data = today.toLocaleString(); // "30/1/2022"
+  html += `<div>Gerado por: às ${data}</div>`;
+
+  let pdfBuffer = await OrdemDeServicoController.pdf(html);
+
+  res.append("Content-Type", "application/x-pdf");
+  res.append("Content-Disposition", 'attachment; filename="ListaClientes.pdf"');
+  res.send(pdfBuffer);
+}
+
+static async pdf(html: string) {
+  const browser = await puppeteer.launch({ headless: "new" });
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1366, height: 768 });
+  await page.setContent(html);
+
+  const pdfBuffer = await page.pdf();
+  await page.close();
+  await browser.close();
+
+  return pdfBuffer;
+}
+
+async exportCsv(req: Request, res: Response): Promise<Response> {
+  // let nome = req.query.nome;
+
+  let ordens: OrdemServico[] = await OrdemServico.findBy({
+    // nome: nome ? ILike(`${nome}`) : undefined,
+  });
+
+  let header = '"ID";"Status";"ModeloBicicleta";"MarcaBicicleta";"Valor"\n';
+  let csv = header;
+
+  ordens.forEach((element) => {
+    csv += `"${element.ordemid}";"${element.statusOrdemServico}";"${element.bicicletaMarca}";"${element.bicicletaMarca}";"${element.valor}"\r`;
+  });
+
+  res.append("Content-Type", "text/csv");
+  res.attachment("ListaOrdens.csv");
+  return res.status(200).send(csv);
+}
+
 }

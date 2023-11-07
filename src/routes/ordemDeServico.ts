@@ -52,4 +52,8 @@ router.put('/ordem/:id', ordemDeServicoController.update);
 
 router.delete('/ordem/:id', validarSeExiste, ordemDeServicoController.delete);
 
+router.get("/ordemPDF", ordemDeServicoController.downloadPdf);
+
+router.get("/ordemCSV", ordemDeServicoController.exportCsv);
+
 export default router;

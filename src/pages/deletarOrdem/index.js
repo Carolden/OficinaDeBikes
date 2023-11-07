@@ -58,18 +58,21 @@ bntListUsers.addEventListener('click', async () => {
 
   for (let info of infos) {
   let tr = document.createElement('tr');
+  let id = document.createElement('td');
   let status = document.createElement('td');
   let modelo = document.createElement('td');
   let marca = document.createElement('td');
   let valor = document.createElement('td');
   let cliente = document.createElement('td');
 
-  status.innerText = info.status;
-  modelo.innerText = info.modelo;
-  marca.innerText = info.marca;
+  id.innerText = info.ordemid;
+  status.innerText = info.statusOrdemServico;
+  modelo.innerText = info.bicicletaModelo;
+  marca.innerText = info.bicicletaMarca;
   valor.innerText = info.valor;
-  cliente.innerText = info.cliente;
+  // cliente.innerText = info.id;
 
+  tr.appendChild(id);
   tr.appendChild(status);
   tr.appendChild(modelo);
   tr.appendChild(marca);
@@ -92,25 +95,25 @@ function download(content, mimeType, filename) {
 }
 
 async function exportPdf() {
-  let pdf = await fetch("http://localhost:3000/clientePDF", {
+  let pdf = await fetch("http://localhost:3000/ordemPDF", {
     headers: {
       "Content-type": "application/json",
       Acccept: "appplication/json",
       // Authorization: authorization,
     },
   });
-  download(await pdf.blob(), "application/x-pdf", "ListaClientes.pdf");
+  download(await pdf.blob(), "application/x-pdf", "ListaOrdens.pdf");
 }
 
 async function exportCsv() {
-  let csv = await fetch("http://localhost:3000/clienteCSV", {
+  let csv = await fetch("http://localhost:3000/ordemCSV", {
     headers: {
       "Content-type": "application/json",
       Acccept: "appplication/json",
       // Authorization: authorization,
     },
   });
-  download(await csv.text(), "text/csv", "ListaClientes.csv");
+  download(await csv.text(), "text/csv", "ListaOrdens.csv");
 }
 
 

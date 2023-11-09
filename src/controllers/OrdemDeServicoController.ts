@@ -58,7 +58,7 @@ export class OrdemDeServicoController {
 async update(req: Request, res: Response): Promise<Response> {
   try {
     const {
-      dataCriacao,
+      // dataCriacao,
       descricaoServico,
       statusOrdemServico,
       dataInicioServico,
@@ -77,7 +77,7 @@ async update(req: Request, res: Response): Promise<Response> {
       return res.status(404).json({ message: 'Ordem de serviço não encontrada.' });
     }
 
-    ordem.dataCriacao = dataCriacao;
+    // ordem.dataCriacao = dataCriacao;
     ordem.descricaoServico = descricaoServico;
     ordem.statusOrdemServico = statusOrdemServico;
     ordem.dataInicioServico = dataInicioServico;

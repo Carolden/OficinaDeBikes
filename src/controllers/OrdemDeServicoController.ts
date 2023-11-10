@@ -15,8 +15,8 @@ export class OrdemDeServicoController {
         dataCriacao,
         descricaoServico,
         statusOrdemServico,
-        dataInicioServico,
-        dataConclusaoServico,
+        // dataInicioServico,
+        // dataConclusaoServico,
         bicicletaModelo,
         bicicletaMarca,
         valor,
@@ -27,8 +27,8 @@ export class OrdemDeServicoController {
       ordem.dataCriacao = dataCriacao;
       ordem.descricaoServico = descricaoServico;
       ordem.statusOrdemServico = statusOrdemServico;
-      ordem.dataInicioServico = dataInicioServico;
-      ordem.dataConclusaoServico = dataConclusaoServico;
+      // ordem.dataInicioServico = dataInicioServico;
+      // ordem.dataConclusaoServico = dataConclusaoServico;
       ordem.bicicletaModelo = bicicletaModelo;
       ordem.bicicletaMarca = bicicletaMarca;
       ordem.valor = valor;

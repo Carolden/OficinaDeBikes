@@ -15,10 +15,10 @@ import { Cliente } from './Cliente';
     @Column()
     statusOrdemServico: string;
 
-    @Column()
+    @Column({ nullable: true })
     dataInicioServico: Date;
 
-    @Column()
+    @Column({ nullable: true })
     dataConclusaoServico: Date;
 
     @Column()

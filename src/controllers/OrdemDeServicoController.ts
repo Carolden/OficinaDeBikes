@@ -57,8 +57,15 @@ export class OrdemDeServicoController {
 
 async update(req: Request, res: Response): Promise<Response> {
   try {
+    const ordemId = Number(req.params.id);
+
+    const ordem = await OrdemServico.findOneBy({ordemid: ordemId});
+
+    if (!ordem) {
+      return res.status(404).json({ message: 'Ordem de serviço não encontrada.' });
+    }
+
     const {
-      // dataCriacao,
       descricaoServico,
       statusOrdemServico,
       dataInicioServico,
@@ -69,30 +76,43 @@ async update(req: Request, res: Response): Promise<Response> {
       clienteId,
     } = req.body;
 
-    const ordemId = Number(req.params.id);
-
-    const ordem = await OrdemServico.findOneBy({ordemid: ordemId});
-
-    if (!ordem) {
-      return res.status(404).json({ message: 'Ordem de serviço não encontrada.' });
+    if (descricaoServico !== undefined) {
+      ordem.descricaoServico = descricaoServico;
     }
 
-    // ordem.dataCriacao = dataCriacao;
-    ordem.descricaoServico = descricaoServico;
-    ordem.statusOrdemServico = statusOrdemServico;
-    ordem.dataInicioServico = dataInicioServico;
-    ordem.dataConclusaoServico = dataConclusaoServico;
-    ordem.bicicletaModelo = bicicletaModelo;
-    ordem.bicicletaMarca = bicicletaMarca;
-    ordem.valor = valor;
-
-    const cliente = await Cliente.findOneBy({id: clienteId});
-
-    if (!cliente) {
-      return res.status(404).json({ message: 'Cliente não encontrado.' });
+    if (statusOrdemServico !== undefined) {
+      ordem.statusOrdemServico = statusOrdemServico;
     }
 
-    ordem.cliente = cliente;
+    if (dataInicioServico !== undefined) {
+      ordem.dataInicioServico = dataInicioServico;
+    }
+
+    if (dataConclusaoServico !== undefined) {
+      ordem.dataConclusaoServico = dataConclusaoServico;
+    }
+
+    if (bicicletaModelo !== undefined) {
+      ordem.bicicletaModelo = bicicletaModelo;
+    }
+
+    if (bicicletaMarca !== undefined) {
+      ordem.bicicletaMarca = bicicletaMarca;
+    }
+
+    if (valor !== undefined) {
+      ordem.valor = valor;
+    }
+
+    if (clienteId !== undefined) {
+      const cliente = await Cliente.findOneBy({id: clienteId});
+
+      if (!cliente) {
+        return res.status(404).json({ message: 'Cliente não encontrado.' });
+      }
+
+      ordem.cliente = cliente;
+    }
 
     await OrdemServico.save(ordem);
 
@@ -102,6 +122,7 @@ async update(req: Request, res: Response): Promise<Response> {
     return res.status(500).json({ message: 'Erro ao atualizar a ordem de serviço' });
   }
 }
+
 
 
 async delete(req: Request, res: Response): Promise<Response> {

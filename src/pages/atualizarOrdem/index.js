@@ -26,25 +26,53 @@ button.addEventListener('click', async (event) => {
     return `${ano}-${mes}-${dia}T${horas}:${minutos}:${segundos}`;
   }
 
-  let inicioDate = new Date(inicio.value);
+  // let inicioDate = new Date(inicio.value);
+  // let conclusaoDate = new Date(conclusao.value);
+
+  // let inicioFormatado = formatarDataParaBackend(inicioDate);
+  // let conclusaoFormatada = formatarDataParaBackend(conclusaoDate);
+
+
+
+  let payload = {};
+
+  if (descricao.value) {
+    payload.descricaoServico = descricao.value;
+  }
+
+  if (statusOrdem.value) {
+    payload.statusOrdemServico = statusOrdem.value;
+  }
+
+  if (inicio.value) {
+    let inicioDate = new Date(inicio.value);
+    let inicioFormatado = formatarDataParaBackend(inicioDate);
+    payload.dataInicioServico = inicioFormatado;
+  }
+
+  if (conclusao.value) {
   let conclusaoDate = new Date(conclusao.value);
-
-  let inicioFormatado = formatarDataParaBackend(inicioDate);
   let conclusaoFormatada = formatarDataParaBackend(conclusaoDate);
+  payload.dataConclusaoServico = conclusaoFormatada;
+  }
+
+  if (modelo.value) {
+    payload.bicicletaModelo = modelo.value;
+  }
+
+  if (marca.value) {
+    payload.bicicletaMarca = marca.value;
+  }
+
+  if (valor.value) {
+    payload.valor = valor.value;
+  }
+
+  if (clienteNumero) {
+    payload.clienteId = clienteNumero;
+  }
 
 
-
-  let payload = {
-    // dataCriacao: "2023-11-06T12:00:00",
-    descricaoServico: descricao.value,
-    statusOrdemServico: statusOrdem.value,
-    dataInicioServico: inicioFormatado,
-    dataConclusaoServico: conclusaoFormatada,
-    bicicletaModelo : modelo.value,
-    bicicletaMarca: marca.value,
-    valor: valor.value,
-    clienteId: clienteNumero,
-  };
 
   let resposta = await fetch(`http://localhost:3000/ordem/${ordemid}`, {
     method: 'PUT',

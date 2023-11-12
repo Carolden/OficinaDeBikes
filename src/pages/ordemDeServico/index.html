@@ -15,9 +15,15 @@
       <input type="text" class="form-control nome" aria-label="Sizing example input" id="descricao" aria-describedby="inputGroup-sizing-default">
     </div>
     <div class="input-group mb-3">
-      <span class="input-group-text" id="inputGroup-sizing-default">Status da Ordem de Serviço</span>
-      <input type="text" class="form-control endereco" aria-label="Sizing example input" id="status" aria-describedby="inputGroup-sizing-default">
+      <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
+      <!-- <input type="text" class="form-control endereco" aria-label="Sizing example input" id="status" aria-describedby="inputGroup-sizing-default"> -->
+      <select id="status" class="form-control">
+        <option value="À fazer">À fazer</option>
+        <option value="Em andamento">Em andamento</option>
+        <option value="Concluído">Concluído</option>
+      </select>
     </div>
+
     <!-- <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default">Data de Início do Serviço</span>
       <input type="text" class="form-control email" aria-label="Sizing example input" id="inicio" aria-describedby="inputGroup-sizing-default">

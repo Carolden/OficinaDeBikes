@@ -73,3 +73,27 @@ form.addEventListener('submit', async (event) => {
     alert('Ops! Algo deu errado!');
   }
 });
+
+async function buscarClientes () {
+  let resposta = await fetch('http://localhost:3000/cliente');
+  let clientes = await resposta.json();
+
+  for (let c of clientes) {
+    let option = document.createElement('option');
+
+    option.innerHTML = c.nome;
+    option.value = c.id;
+
+    cliente.appendChild(option);
+  }
+}
+
+async function init () {
+  console.log("init")
+  await buscarClientes();
+  if (id) {
+    buscarDados();
+  }
+}
+
+init();

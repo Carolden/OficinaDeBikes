@@ -69,6 +69,8 @@ export class OrdemDeServicoController {
         return res.status(404).json({ message: 'Ordem de serviço não encontrada.' });
       }
 
+      let statusAnterior = ordem.statusOrdemServico + "";
+
       const {
         descricaoServico,
         statusOrdemServico,
@@ -119,7 +121,7 @@ export class OrdemDeServicoController {
       }
 
       await OrdemServico.save(ordem);
-      if (ordem.statusOrdemServico == "Concluído" && ordem.cliente.email) {
+      if (ordem.statusOrdemServico == "Concluído" && statusAnterior != "Concluído" && ordem.cliente.email) {
         const transporter = NodeMailer.createTransport({
           host: "sandbox.smtp.mailtrap.io",
           port: 2525,

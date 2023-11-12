@@ -9,11 +9,10 @@ export class OrdemDeServicoController {
   async create(req: Request, res: Response): Promise<Response> {
     try {
       const {
-        dataCriacao,
         descricaoServico,
         statusOrdemServico,
-        // dataInicioServico,
-        // dataConclusaoServico,
+        dataInicioServico,
+        dataConclusaoServico,
         bicicletaModelo,
         bicicletaMarca,
         valor,
@@ -21,11 +20,11 @@ export class OrdemDeServicoController {
       } = req.body;
 
       const ordem = new OrdemServico();
-      ordem.dataCriacao = dataCriacao;
+      ordem.dataCriacao = new Date;
       ordem.descricaoServico = descricaoServico;
       ordem.statusOrdemServico = statusOrdemServico;
-      // ordem.dataInicioServico = dataInicioServico;
-      // ordem.dataConclusaoServico = dataConclusaoServico;
+      ordem.dataInicioServico = dataInicioServico;
+      ordem.dataConclusaoServico = dataConclusaoServico;
       ordem.bicicletaModelo = bicicletaModelo;
       ordem.bicicletaMarca = bicicletaMarca;
       ordem.valor = valor;
@@ -45,6 +44,14 @@ export class OrdemDeServicoController {
       return res.status(500).json({ message: 'Erro ao criar a ordem de serviço' });
     }
   }
+
+
+  async find (req: Request, res: Response): Promise<Response> {
+    let os: OrdemServico = res.locals.OrdemDeServico;
+
+    return res.status(200).json(os);
+  }
+
 
   async list(req: Request, res: Response): Promise<Response> {
     let ordem: OrdemServico[] = await OrdemServico.find();

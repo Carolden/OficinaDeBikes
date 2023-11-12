@@ -48,6 +48,9 @@ router.post('/ordem', ordemDeServicoController.create);
 
 router.get('/ordem', ordemDeServicoController.list);
 
+
+router.get('/ordem/:id', validarSeExiste, ordemDeServicoController.find);
+
 router.put('/ordem/:id', ordemDeServicoController.update);
 
 router.delete('/ordem/:id', validarSeExiste, ordemDeServicoController.delete);

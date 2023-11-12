@@ -30,7 +30,9 @@ import { Cliente } from './Cliente';
     @Column()
     valor: number;
 
-    @ManyToOne(() => Cliente, (cliente) => cliente.ordensServico)
+    @ManyToOne(() => Cliente, (cliente) => cliente.ordensServico, {
+      eager: true
+    })
     @JoinColumn({ name: 'id' })
     cliente: Cliente;
   }

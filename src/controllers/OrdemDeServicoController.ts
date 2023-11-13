@@ -29,7 +29,7 @@ export class OrdemDeServicoController {
       ordem.bicicletaMarca = bicicletaMarca;
       ordem.valor = valor;
 
-      const cliente = await Cliente.findOneBy(clienteId);
+      const cliente = await Cliente.findOneBy({id: clienteId});
       if (!cliente) {
         return res.status(404).json({ message: 'Cliente não encontrado.' });
       }

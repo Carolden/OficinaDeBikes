@@ -1,33 +1,30 @@
-let inputEmail = document.getElementById('floatingInput');
-let inputSenha = document.getElementById('floatingPassword');
-let button = document.getElementById('button');
-
-button.addEventListener('click', async (event) => {
+document.getElementById("form").addEventListener('submit', async (event) => {
   event.stopPropagation();
   event.preventDefault();
 
-  let payload = {
-    email: inputEmail.value,
-    senha: inputSenha.value,
-  };
+  // let email = document.getElementById("email").value;
+  // let senha = document.getElementById("senha").value;
 
-  let resposta = await fetch('http://localhost:3000/login', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  })
+  // let payload = {
+  //   email,
+  //   senha
+  // }
 
-  console.log(resposta.ok);
+  // let url = 'http://localhost:3000/usuarios/login';
+  // let method = 'POST';
 
-  if (resposta.ok) {
-    location.href = './../index/index.html'
-  } else if (resposta.status == 401) {
-    let dados = await resposta.json();
-    alert(dados.mensagem);
-  } else {
-    alert('Ops! Algo deu errado!');
-  }
+  // let resposta = await fetch(url, {
+  //   method: method,
+  //   headers: {
+  //     'Content-type': 'application/json',
+  //     'Accept': 'application/json'
+  //   },
+  //   body: JSON.stringify(payload)
+  // });
+
+  // if (resposta.ok) {
+    window.location.href = '../../pages/index.html' // Autenticado, tela inicial
+  // } else {
+  //   alert('Usuário ou senha incorretos!');
+  // }
 });

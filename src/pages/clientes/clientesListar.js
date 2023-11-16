@@ -43,3 +43,34 @@ async function excluir (id) {
 }
 
 buscarClientes();
+
+function download(content, mimeType, filename) {
+  const a = document.createElement("a");
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  a.setAttribute("href", url);
+  a.setAttribute("download", filename);
+  a.click();
+}
+
+async function exportPdf() {
+  let pdf = await fetch("http://localhost:3000/clientePDF", {
+    headers: {
+      "Content-type": "application/json",
+      Acccept: "appplication/json",
+      // Authorization: authorization,
+    },
+  });
+  download(await pdf.blob(), "application/x-pdf", "ListaClientes.pdf");
+}
+
+async function exportCsv() {
+  let csv = await fetch("http://localhost:3000/clienteCSV", {
+    headers: {
+      "Content-type": "application/json",
+      Acccept: "appplication/json",
+      // Authorization: authorization,
+    },
+  });
+  download(await csv.text(), "text/csv", "ListaClientes.csv");
+}

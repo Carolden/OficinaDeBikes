@@ -43,11 +43,11 @@ form.addEventListener('submit', async (event) => {
   let payload = {
     descricaoServico: descricao.value,
     statusOrdemServico: statusOrdem.value,
-    dataInicioServico: inicio.value,
-    dataConclusaoServico: conclusao.value,
+    dataInicioServico: inicio.value != "" ? inicio.value : null,
+    dataConclusaoServico: conclusao.value != "" ? conclusao.value : null,
     bicicletaModelo: modelo.value,
     bicicletaMarca: marca.value,
-    valor: valor.value,
+    valor: valor.value != "" ? valor.value : null,
     clienteId: cliente.value,
   }
 

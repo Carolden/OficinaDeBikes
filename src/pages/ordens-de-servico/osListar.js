@@ -21,7 +21,7 @@ async function buscar () {
     tdDataCriacao.innerText = os.dataCriacao ? new Date(os.dataCriacao).toLocaleDateString() : "";
     tdDataInicio.innerText = os.dataInicioServico ? new Date(os.dataInicioServico).toLocaleDateString() : "";
     tdDataConclusao.innerText = os.dataConclusaoServico ? new Date(os.dataConclusaoServico).toLocaleDateString() : "";
-    tdValor.innerText = os.valor;
+    tdValor.innerText = os.valor == null ? '' : 'R$ ' + os.valor;
 
     tdAcoes.innerHTML = `
       <a class="btn btn-outline-primary btn-sm" href="formulario.html?id=${os.ordemid}">Editar</a>

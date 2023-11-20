@@ -27,7 +27,7 @@ import { Cliente } from './Cliente';
     @Column()
     bicicletaMarca: string;
 
-    @Column()
+    @Column({nullable: true})
     valor: number;
 
     @ManyToOne(() => Cliente, (cliente) => cliente.ordensServico, {

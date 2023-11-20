@@ -1,64 +1,67 @@
+import { Usuario } from "../models/Usuarios";
 import { Request, Response } from 'express';
-import { Usuario } from '../models/Usuarios';
-import { ILike } from 'typeorm';
-import bcrypt from 'bcrypt';
+import { ILike } from "typeorm";
+let md5 = require('md5');
 
 export class UsuariosController {
 
-  async list (req: Request, res: Response): Promise<Response> {
-    let nome = req.query.nome;
+    async list (req: Request, res: Response): Promise<Response> {
+        let users: Usuario[] = await Usuario.find();
 
-    let users: Usuario[] = await Usuario.findBy({
-      nome: nome ? ILike(`%${nome}%`) : undefined
-    });
+        return res.status(200).json(users);
+    }
 
-    return res.status(200).json(users);
-  }
+    async find (req: Request, res: Response): Promise<Response> {
+      let usuario: Usuario = res.locals.usuario;
 
-  async find (req: Request, res: Response): Promise<Response> {
-    let usuario: Usuario = res.locals.usuario;
+      return res.status(200).json(usuario);
+    }
 
-    return res.status(200).json(usuario);
-  }
 
-  async create (req: Request, res: Response): Promise<Response> {
-    let body = req.body;
+    async create (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+        console.log(body)
 
-    let senha = await bcrypt.hash(body.senha, 10);
+        let usuario: Usuario = await Usuario.create({
+            nome: body.nome,
+            email: body.email,
+            senha: body.senha,
+        }).save();
 
-    let usuario: Usuario = await Usuario.create({
-      nome: body.nome,
-      email: body.email,
-      senha: senha,
-    }).save();
+        return res.status(200).json(usuario);
+    }
 
-    let { senha: s, ...usuarioSemSenha } = usuario;
+    async update (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+        let usuario: Usuario = res.locals.usuario;
 
-    return res.status(200).json(usuarioSemSenha);
-  }
+        usuario.nome = body.nome,
+        usuario.email = body.email,
+        usuario.senha = body.senha,
+        await usuario.save();
 
-  async update (req: Request, res: Response): Promise<Response> {
-    let body = req.body;
-    let usuario: Usuario = res.locals.usuario;
+        return res.status(200).json(usuario);
+    }
 
-    let senha = await bcrypt.hash(body.senha, 10);
+    async delete (req: Request, res: Response): Promise<Response> {
+        let usuario: Usuario = res.locals.usuario;
 
-    usuario.nome = body.nome;
-    usuario.email = body.email;
-    usuario.senha = senha;
-    await usuario.save();
+        usuario.remove();
 
-    let { senha: s, ...usuarioSemSenha } = usuario;
+        return res.status(200).json();
+    }
 
-    return res.status(200).json(usuarioSemSenha);
-  }
+    async login (req: Request, res: Response): Promise<Response> {
+        let body = req.body;
+        // let senha = md5(body.senha);
+        let usuarioLogin = await Usuario.findOneBy({email: body.email, senha: body.senha});
 
-  async delete (req: Request, res: Response): Promise<Response> {
-    let usuario: Usuario = res.locals.usuario;
+        if (usuarioLogin) {
+            return res.status(200).json();
+        }
 
-    usuario.remove();
-
-    return res.status(200).json();
-  }
-
+        return res.status(422).json({
+            mensagem: "Usuário ou senha incorretos"
+        });
+    }
 }

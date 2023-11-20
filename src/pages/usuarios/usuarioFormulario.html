@@ -9,8 +9,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-  <title>Ordens de Serviço</title>
+
+  <title>Usuários</title>
+
 </head>
 <body class="bg-light">
   <header>
@@ -25,7 +28,6 @@
       color: #1E90FF">
     </nav>
     </header>
-
   <div class="row">
     <div class="col-3 col-xl-2">
       <div class="row px-4">
@@ -38,14 +40,14 @@
 
             <div class="flex-row">
               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M686-132 444-376q-20 8-40.5 12t-43.5 4q-100 0-170-70t-70-170q0-36 10-68.5t28-61.5l146 146 72-72-146-146q29-18 61.5-28t68.5-10q100 0 170 70t70 170q0 23-4 43.5T584-516l244 242q12 12 12 29t-12 29l-84 84q-12 12-29 12t-29-12Zm29-85 27-27-256-256q18-20 26-46.5t8-53.5q0-60-38.5-104.5T386-758l74 74q12 12 12 28t-12 28L332-500q-12 12-28 12t-28-12l-74-74q9 57 53.5 95.5T360-440q26 0 52-8t47-25l256 256ZM472-488Z"/></svg>
-              <a class="text-decoration-none px-2 fw-semibold text-black" href="../ordens-de-servico/index.html">
+              <a class="text-decoration-none px-2 fw-semibold text-black" href="ordens-de-servico/index.html">
               Ordens de Serviço
               </a>
             </div>
 
             <div class="flex-row">
               <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
-              <a class="text-decoration-none px-2 fw-semibold text-black" href="../clientes/index.html">
+              <a class="text-decoration-none px-2 fw-semibold text-black" href="clientes/index.html">
                 Clientes
               </a>
             </div>
@@ -72,80 +74,42 @@
     <div class="col-9 col-xl-10">
       <div class="px-4">
 
-
-        <!-- Inicio conteudo pagina -->
-
-        <body class="bg-light">
-          <div class=" mt-4 bg-white p-2 px-4 rounded shadow">
-            <div class="row">
-              <div class="col-12 mb-2 d-flex align-items-center justify-content-between">
-                <h2>Ordem de Serviço</h2>
-              </div>
-              <div class="col-12">
-
-
-
-                <form id="formulario">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Descrição do Serviço</span>
-                    <input type="text" class="form-control nome" aria-label="Sizing example input" id="descricao" aria-describedby="inputGroup-sizing-default">
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
-                    <select id="status" class="form-control">
-                      <option value="À fazer">À fazer</option>
-                      <option value="Em andamento">Em andamento</option>
-                      <option value="Concluído">Concluído</option>
-                    </select>
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Data de Início do Serviço</span>
-                    <input type="date" class="form-control email" aria-label="Sizing example input" id="inicio" aria-describedby="inputGroup-sizing-default">
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Data de Conclusão</span>
-                    <input type="date" class="form-control telefone" aria-label="Sizing example input" id="conclusao" aria-describedby="inputGroup-sizing-default">
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Modelo da Bicicleta</span>
-                    <input type="text" class="form-control telefone" aria-label="Sizing example input" id="modelo" aria-describedby="inputGroup-sizing-default">
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Marca da Bicicleta</span>
-                    <input type="text" class="form-control telefone" aria-label="Sizing example input" id="marca" aria-describedby="inputGroup-sizing-default">
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Valor</span>
-                    <input type="text" class="form-control telefone" aria-label="Sizing example input" id="valor" aria-describedby="inputGroup-sizing-default">
-                  </div>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Cliente</span>
-                    <select required id="cliente" class="form-control">
-                      <option value="">Selecione...</option>
-                    </select>
+      </head>
+      <body class="bg-light">
+        <div class=" mt-4 bg-white p-2 px-4 rounded shadow">
+          <div class="row">
+            <div class="col-12 mb-2 d-flex align-items-center justify-content-between">
+              <h2>Usuário</h2>
+            </div>
+            <div class="col-12">
+              <form id="formulario">
+                <div class="form-group">
+                  <label>Nome do usuário:</label>
+                  <input class="form-control" type="text" id="nome" name="nome" required/>
                 </div>
-                  <br>
-
-                  <button type="submit" class="btn btn-primary" id="button">Salvar</button>
-
-                  <a href="index.html"><button type="button" class="btn btn-outline-secondary" id="bnt-voltar">Voltar</button></a>
-
-                </form>
-
-
-
-
-
-
+                <div class="form-group">
+                  <label>E-mail:</label>
+                  <input class="form-control" type="text" id="email" name="email" required/>
+                </div>
+                <div class="form-group">
+                  <label>Senha:</label>
+                  <input class="form-control" type="text" id="senha" name="senha" required/>
+                </div>
+              <div class="d-flex justify-content-end mt-2 gap-2">
+                <a class="btn btn-outline-secondary" href="usuario.html">Voltar</a>
+                <button class="btn btn-primary">Salvar</button>
               </div>
+              </form>
             </div>
           </div>
+        </div>
 
-          <script src="osFormulario.js"></script>
+        <script src="usuarioFormulario.js"></script>
 
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-        </body>
-
-</html>
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+          crossorigin="anonymous"
+        ></script>
+      </body>
+    </html>

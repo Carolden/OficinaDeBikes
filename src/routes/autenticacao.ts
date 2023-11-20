@@ -1,10 +1,10 @@
-import { Router } from 'express';
-// import { AutenticacaoController } from '../controllers/AutenticacaoController';
+// import { Router } from 'express';
+// // import { AutenticacaoController } from '../controllers/AutenticacaoController';
 
-let router: Router = Router();
+// let router: Router = Router();
 
-// let autenticacaoController: AutenticacaoController = new AutenticacaoController();
+// // let autenticacaoController: AutenticacaoController = new AutenticacaoController();
 
-// router.post('/login', autenticacaoController.login);
+// // router.post('/login', autenticacaoController.login);
 
-export default router;
+// export default router;

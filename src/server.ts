@@ -1,10 +1,8 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
-import route from "./routes/usuarios";
-import autenticacao from './routes/autenticacao';
+import usuarios from "./routes/usuarios";
 import ordemDeServico from './routes/ordemDeServico';
 import cliente from './routes/cliente';
-// import { basicAuth } from './middlewares/basic-auth';
 
 
 let server: Express = express();
@@ -17,14 +15,9 @@ server.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-server.use(route);
-server.use(autenticacao);
+server.use(usuarios);
 server.use(ordemDeServico);
 server.use(cliente);
-// server.use(basicAuth, cidadesRoutes);
-// server.use(itensRoutes);
-// server.use(movimentacoesRoutes);
-
 
 export default {
   start () {

@@ -63,4 +63,6 @@ router.put('/usuarios/:id', validarSeExiste, validarPayload, validarSeEmailExist
 
 router.delete('/usuarios/:id', validarSeExiste, usuariosController.delete);
 
+router.post('/usuarios/login', usuariosController.login);
+
 export default router;

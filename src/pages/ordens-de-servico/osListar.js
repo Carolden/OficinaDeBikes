@@ -8,6 +8,7 @@ async function buscar () {
     let tr = document.createElement('tr');
     let tdId = document.createElement('td');
     let tdCliente = document.createElement('td');
+    let tdDescricao = document.createElement('td');
     let tdStatus = document.createElement('td');
     let tdDataCriacao = document.createElement('td');
     let tdDataInicio = document.createElement('td');
@@ -17,6 +18,7 @@ async function buscar () {
 
     tdId.innerText = os.ordemid;
     tdCliente.innerText = os.cliente?.nome;
+    tdDescricao.innerText = os.descricaoServico;
     tdStatus.innerText = os.statusOrdemServico;
     tdDataCriacao.innerText = os.dataCriacao ? new Date(os.dataCriacao).toLocaleDateString() : "";
     tdDataInicio.innerText = os.dataInicioServico ? new Date(os.dataInicioServico).toLocaleDateString() : "";
@@ -30,6 +32,7 @@ async function buscar () {
     tdAcoes.classList = "text-center";
     tr.appendChild(tdId);
     tr.appendChild(tdCliente);
+    tr.appendChild(tdDescricao);
     tr.appendChild(tdStatus);
     tr.appendChild(tdDataCriacao);
     tr.appendChild(tdDataInicio);
